@@ -1,0 +1,38 @@
+<?php
+/**
+ * @author Pavel Tsydzik <xagero@gmail.com>
+ * @date 03.08.2017 18:54
+ */
+
+namespace Exercises\Factory\Repository\Adapter;
+
+use Exercises\Repository\Adapter\StorageInterface;
+use Interop\Container\ContainerInterface;
+use Interop\Container\Exception\ContainerException;
+use Zend\ServiceManager\Exception\ServiceNotCreatedException;
+use Zend\ServiceManager\Exception\ServiceNotFoundException;
+use Zend\ServiceManager\Factory\FactoryInterface;
+
+/**
+ * Class StorageFactory
+ * @package Exercises\Factory\Adapter
+ */
+class StorageFactory implements FactoryInterface
+{
+
+    /**
+     * Create an object
+     *
+     * @param  ContainerInterface $container
+     * @param  string $requestedName
+     * @param  null|array $options
+     * @return object
+     * @throws ServiceNotFoundException if unable to resolve the service.
+     * @throws ServiceNotCreatedException if an exception is raised when creating a service.
+     * @throws ContainerException if any other error occurs
+     */
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    {
+        return $container->get(StorageInterface::class);
+    }
+}
